@@ -7,6 +7,7 @@ use App\Http\Controllers\RecetaController;
 use App\Http\Controllers\PilotoController;
 use App\Http\Controllers\VueloController;
 use App\Http\Controllers\PasajeController;
+use App\Http\Controllers\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,16 @@ use App\Http\Controllers\PasajeController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('usuarios/restore', [UsuarioController::class, 'restaurar'])->name(
+    'usuarios.restore'
+);
+
+Route::delete('usuarios/borrardefinitivo', [UsuarioController::class, 'borrarDefinitivo'])->name(
+    'usuarios.borrardefinitivo'
+);
+
+Route::resource("usuarios", UsuarioController::class);
 
 Route::get('alumnos/pdf', [AlumnoController::class, 'listadoPdf'])->name(
     'alumnos.pdf'

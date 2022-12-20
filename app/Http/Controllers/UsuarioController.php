@@ -14,7 +14,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = Usuario::all();
+        return view("usuarios.index",compact("usuarios"));
     }
 
     /**
@@ -78,8 +79,20 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->delete();
+    }
+
+    public function borrarDefinitivo()
+    {
+        $usuarios = Usuario::onlyTrashed()->forceDelete();
+    }
+
+    public function restaurar()
+    {
+        Usuario::onlyTrashed()->restore();
+        return back()->with('success', 'Restaurado');
     }
 }

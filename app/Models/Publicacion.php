@@ -9,4 +9,10 @@ class Publicacion extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
 }
